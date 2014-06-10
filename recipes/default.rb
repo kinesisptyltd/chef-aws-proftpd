@@ -19,11 +19,11 @@
 # limitations under the License.
 #
 
-if node[:proftpd][:sql][:engine] == "postgres"
+if node[:proftpd][:sql][:backend] == "postgres"
   package "proftpd-mod-pgsql" do
     action :upgrade
   end
-elsif node[:proftpd][:sql][:engine] == "mysql"
+elsif node[:proftpd][:sql][:backend] == "mysql"
   package "proftpd-mod-mysql" do
     action :upgrade
   end
