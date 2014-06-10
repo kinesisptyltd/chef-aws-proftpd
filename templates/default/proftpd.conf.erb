@@ -20,7 +20,7 @@ TransferLog               <%= node[:proftpd][:transfer_log] %>
 # Networking
 Port                      <%= node[:proftpd][:port] %>
 UseIPv6                   off
-PassivePorts              <%= node[:pasv_min_port] %> <%= node[:pasv_max_port] %>
+PassivePorts              <%= node[:proftpd][:pasv_min_port] %> <%= node[:proftpd][:pasv_max_port] %>
 
 # Tuning
 MaxInstances              <%= node[:proftpd][:max_instances] %>
