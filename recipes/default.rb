@@ -19,14 +19,8 @@
 # limitations under the License.
 #
 
-if node[:proftpd][:sql][:backend] == "postgres"
-  package "proftpd-mod-pgsql" do
-    action :upgrade
-  end
-elsif node[:proftpd][:sql][:backend] == "mysql"
-  package "proftpd-mod-mysql" do
-    action :upgrade
-  end
+apt_package "proftpd-mod-pgsql" do
+  action :install
 end
 
 service "proftpd" do
