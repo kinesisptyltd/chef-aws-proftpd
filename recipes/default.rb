@@ -19,7 +19,9 @@
 # limitations under the License.
 #
 
-apt_package "proftpd-mod-pgsql" do
+include_recipe "apt"
+
+package "proftpd-mod-pgsql" do
   action :install
 end
 

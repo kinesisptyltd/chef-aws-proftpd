@@ -7,3 +7,5 @@ version           "1.0.0"
 recipe            "proftpd", "Installs proftpd backed by a SQL database"
 
 supports "ubuntu"
+
+depends "apt"
