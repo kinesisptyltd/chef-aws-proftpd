@@ -45,7 +45,7 @@ template "/etc/proftpd/proftpd.conf" do
   notifies :restart, resources(:service => "proftpd")
 end
 
-template "/etc/proftpd/sql.conf" do
+template "/etc/proftpd/conf.d/sql.conf" do
   source "sql.conf.erb"
   mode 0644
   owner node[:proftpd][:user]

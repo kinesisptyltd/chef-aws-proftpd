@@ -8,6 +8,7 @@ ServerName                <%= node[:proftpd][:server_name] %>
 ServerAdmin               <%= node[:proftpd][:server_admin] %>
 ServerIdent               <%= node[:proftpd][:server_ident] %>
 ServerType                <%= node[:proftpd][:server_type] %>
+DefaultServer             on
 
 User                      <%= node[:proftpd][:user] %>
 Group                     <%= node[:proftpd][:group] %>
@@ -18,6 +19,9 @@ SystemLog                 <%= node[:proftpd][:system_log] %>
 TransferLog               <%= node[:proftpd][:transfer_log] %>
 
 # Networking
+<% if node[:proftpd][:masquerade_address] %>
+MasqueradeAddress         <%= node[:proftpd][:masquerade_address] %>
+<% end %>
 Port                      <%= node[:proftpd][:port] %>
 UseIPv6                   off
 PassivePorts              <%= node[:proftpd][:pasv_min_port] %> <%= node[:proftpd][:pasv_max_port] %>
