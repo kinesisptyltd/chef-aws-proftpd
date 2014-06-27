@@ -2,6 +2,7 @@
 
 <IfModule mod_sql.c>
   SQLEngine on
+  CreateHome on
 
   SQLBackend <%= node[:proftpd][:sql][:backend] %>
   SQLAuthenticate <%= node[:proftpd][:sql][:authenticate] %>
