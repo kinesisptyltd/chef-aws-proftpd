@@ -37,7 +37,6 @@ default[:proftpd][:pasv_max_port] = 1048
 
 # Tuning
 default[:proftpd][:max_instances] = 30
-default[:proftpd][:max_clients_per_host] = 4
 default[:proftpd][:timeout_no_transfer] = 600
 default[:proftpd][:timeout_stalled] = 600
 default[:proftpd][:timeout_idle] = 1200

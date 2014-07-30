@@ -28,7 +28,6 @@ PassivePorts              <%= node[:proftpd][:pasv_min_port] %> <%= node[:proftp
 
 # Tuning
 MaxInstances              <%= node[:proftpd][:max_instances] %>
-MaxClientsPerHost         <%= node[:proftpd][:max_clients_per_host] %>
 TimeoutNoTransfer         <%= node[:proftpd][:timeout_no_transfer] %>
 TimeoutStalled            <%= node[:proftpd][:timeout_stalled] %>
 TimeoutIdle               <%= node[:proftpd][:timeout_idle] %>
