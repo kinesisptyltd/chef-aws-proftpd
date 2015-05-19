@@ -48,3 +48,10 @@ default[:proftpd][:sql][:log] = "/var/log/proftpd/sql.log"
 default[:proftpd][:sql][:user_info] = "ftp_users username password uid gid home_dir \"NULL\""
 default[:proftpd][:sql][:connect_info] = "user@server user password"
 default[:proftpd][:sql][:auth_types] = "OpenSSL Crypt"
+
+# SFTP
+default[:proftpd][:sftp][:port] = 211
+default[:proftpd][:sftp][:log] = "/var/log/proftpd/sftp.log"
+default[:proftpd][:sftp][:auth_methods] = "password"
+default[:proftpd][:sftp][:host_rsa_key] = "/etc/ssh/ssh_host_rsa_key"
+default[:proftpd][:sftp][:host_dsa_key] = "/etc/ssh/ssh_host_dsa_key"

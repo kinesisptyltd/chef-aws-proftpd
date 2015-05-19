@@ -53,6 +53,14 @@ template "/etc/proftpd/conf.d/sql.conf" do
   notifies :restart, resources(:service => "proftpd")
 end
 
+template "/etc/proftpd/conf.d/sftp.conf" do
+  source "sftp.conf.erb"
+  mode 0644
+  owner node[:proftpd][:user]
+  group node[:proftpd][:group]
+  notifies :restart, resources(:service => "proftpd")
+end
+
 service "proftpd" do
-  action [ :enable, :start ]
+  action [:enable, :start]
 end
