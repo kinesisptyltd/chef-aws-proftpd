@@ -61,6 +61,14 @@ template "/etc/proftpd/conf.d/sftp.conf" do
   notifies :restart, resources(:service => "proftpd")
 end
 
+template "/etc/init.d/proftpd" do
+  source "proftpd"
+  mode 0644
+  owner "root"
+  group "root"
+  notifies :restart, resources(:service => "proftpd")
+end
+
 service "proftpd" do
   action [:enable, :start]
 end
