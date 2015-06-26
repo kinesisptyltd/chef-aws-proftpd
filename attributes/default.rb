@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: proftpd
+# Cookbook Name:: aws-proftpd
 #
 # Author:: Christopher Chow (<chris@chowie.net>)
 #
@@ -26,6 +26,7 @@ default[:proftpd][:server_ident] = "off"
 default[:proftpd][:user] = "proftpd"
 default[:proftpd][:group] = "nogroup"
 default[:proftpd][:umask] = "022 022"
+default[:proftpd][:data_directory] = "/data"
 
 default[:proftpd][:system_log] = "/var/log/proftpd/proftpd.log"
 default[:proftpd][:transfer_log] = "/var/log/proftpd/xfer.log"
@@ -50,8 +51,10 @@ default[:proftpd][:sql][:connect_info] = "user@server user password"
 default[:proftpd][:sql][:auth_types] = "OpenSSL Crypt"
 
 # SFTP
-default[:proftpd][:sftp][:port] = 211
+default[:proftpd][:sftp][:port] = 22
 default[:proftpd][:sftp][:log] = "/var/log/proftpd/sftp.log"
 default[:proftpd][:sftp][:auth_methods] = "password"
 default[:proftpd][:sftp][:host_rsa_key] = "/etc/ssh/ssh_host_rsa_key"
 default[:proftpd][:sftp][:host_dsa_key] = "/etc/ssh/ssh_host_dsa_key"
+
+default[:openssh][:server][:port] = 2222
