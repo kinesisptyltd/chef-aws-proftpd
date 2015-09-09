@@ -57,7 +57,7 @@ cron "blacklists-daily" do
   command "/usr/local/bin/blacklists.sh"
 end
 
-logrotate_app "rsyslog" do
+logrotate_app "blacklists" do
   cookbook  "logrotate"
   path      "/var/log/blacklists.log"
   options   ["missingok", "notifempty", "compress", "delaycompress", "sharedscripts"]
