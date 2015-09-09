@@ -83,6 +83,7 @@ end
 
 directory node[:proftpd][:data_directory] do
   action :create
+  recursive true
   owner node[:proftpd][:user]
   group node[:proftpd][:group]
 end
