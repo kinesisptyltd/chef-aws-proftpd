@@ -61,6 +61,14 @@ template "/etc/proftpd/conf.d/sftp.conf" do
   notifies :restart, resources(:service => "proftpd")
 end
 
+template "/etc/proftpd/conf.d/ban.conf" do
+  source "ban.conf.erb"
+  mode 0644
+  owner node[:proftpd][:user]
+  group node[:proftpd][:group]
+  notifies :restart, resources(:service => "proftpd")
+end
+
 template "/etc/init.d/proftpd" do
   source "proftpd"
   mode "0755"
