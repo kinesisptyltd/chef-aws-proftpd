@@ -58,3 +58,6 @@ default[:proftpd][:sftp][:host_rsa_key] = "/etc/ssh/ssh_host_rsa_key"
 default[:proftpd][:sftp][:host_dsa_key] = "/etc/ssh/ssh_host_dsa_key"
 
 default[:openssh][:server][:port] = 2222
+
+# Backup cron job
+default[:proftpd][:backup][:bucket] = nil
