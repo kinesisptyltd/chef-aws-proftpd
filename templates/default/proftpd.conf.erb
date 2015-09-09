@@ -27,6 +27,7 @@ UseIPv6                   off
 PassivePorts              <%= node[:proftpd][:pasv_min_port] %> <%= node[:proftpd][:pasv_max_port] %>
 
 # Tuning
+MaxLoginAttempts 1
 MaxInstances              <%= node[:proftpd][:max_instances] %>
 TimeoutNoTransfer         <%= node[:proftpd][:timeout_no_transfer] %>
 TimeoutStalled            <%= node[:proftpd][:timeout_stalled] %>

@@ -1,7 +1,7 @@
 <IfModule mod_ban.c>
   BanEngine on
   BanLog /var/log/proftpd/ban.log
-  BanTable /var/db/proftpd/ban.tab
+  BanTable /var/run/proftpd/ban.tab
 
   # If the same client reaches the MaxLoginAttempts limit 2 times
   # within 10 minutes, automatically add a ban for that client that
