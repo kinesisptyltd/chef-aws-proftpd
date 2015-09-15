@@ -8,6 +8,8 @@
 #website        :www.ftmon.org  www.setuptips.com
 #---------------------------------------------------------------------------
 
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
 #
 # Where we keep all the blacklists.
 BL_DIR="/var/lib/blacklists"
