@@ -12,5 +12,7 @@
 
     SFTPCompression delayed
     SFTPAuthMethods <%= node[:proftpd][:sftp][:auth_methods] %>
+
+    AllowOverwrite on
   </VirtualHost>
 </IfModule>
