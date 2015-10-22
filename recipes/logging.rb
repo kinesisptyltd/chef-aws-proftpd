@@ -59,3 +59,38 @@ logrotate_app "rsyslog-other" do
   create    "644 syslog adm"
   postrotate "restart rsyslog >/dev/null 2>&1 || true"
 end
+
+logrotate_app "proftpd-modules" do
+  cookbook  "logrotate"
+  path      [
+    "/var/log/proftpd/ban.log",
+    "/var/log/proftpd/sftp.log",
+    "/var/log/proftpd/sql.log"
+  ]
+  options   ["missingok", "compress", "delaycompress", "notifempty"]
+  frequency "weekly"
+  rotate    7
+  create    "640 root adm"
+  postrotate <<-EOF
+   restart rsyslog >/dev/null 2>&1 || true"
+   invoke-rc.d proftpd restart 2>/dev/null >/dev/null || true
+  EOF
+end
+
+["xfer", "ban"].each do |log|
+  base_papertrail "proftpd-#{log}" do
+    tag "proftpd-#{log}"
+    facility node["proftpd"]["syslog"]["facility"]
+    file "/var/log/proftpd/#{log}.log"
+    host node["proftpd"]["syslog"]["host"]
+    port node["proftpd"]["syslog"]["port"]
+  end
+end
+
+base_papertrail "proftpd-main" do
+  tag "proftpd-main"
+  facility node["proftpd"]["syslog"]["facility"]
+  file "/var/log/proftpd/proftpd.log"
+  host node["proftpd"]["syslog"]["host"]
+  port node["proftpd"]["syslog"]["port"]
+end

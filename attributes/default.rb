@@ -61,3 +61,8 @@ default[:openssh][:server][:port] = 2222
 
 # Backup cron job
 default[:proftpd][:backup][:bucket] = nil
+
+# Logging
+default[:proftpd][:syslog][:host] = nil
+default[:proftpd][:syslog][:port] = nil
+default[:proftpd][:syslog][:facility] = "local3"
