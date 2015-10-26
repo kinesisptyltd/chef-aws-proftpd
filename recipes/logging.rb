@@ -72,7 +72,7 @@ logrotate_app "proftpd-modules" do
   rotate    7
   create    "640 root adm"
   postrotate <<-EOF
-   restart rsyslog >/dev/null 2>&1 || true"
+   restart rsyslog >/dev/null 2>&1 || true
    invoke-rc.d proftpd restart 2>/dev/null >/dev/null || true
   EOF
 end
