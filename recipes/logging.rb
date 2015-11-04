@@ -77,7 +77,7 @@ logrotate_app "proftpd-modules" do
   EOF
 end
 
-["xfer", "ban", "sftp", "sql"].each do |log|
+["xfer", "ban", "sftp"].each do |log|
   base_papertrail "proftpd-#{log}" do
     tag "proftpd-#{log}"
     facility node["proftpd"]["syslog"]["facility"]
