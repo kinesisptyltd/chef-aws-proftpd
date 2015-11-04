@@ -18,6 +18,9 @@ Umask                     <%= node[:proftpd][:umask] %>
 SystemLog                 <%= node[:proftpd][:system_log] %>
 TransferLog               <%= node[:proftpd][:transfer_log] %>
 
+# Jail Users
+DefaultRoot ~
+
 # Networking
 <% if node[:proftpd][:masquerade_address] %>
 MasqueradeAddress         <%= node[:proftpd][:masquerade_address] %>
