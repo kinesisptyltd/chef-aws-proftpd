@@ -19,78 +19,59 @@
 # limitations under the License.
 #
 
-include_recipe "rsyslog::default"
-
-package "rsyslog-gnutls" do
-  action :install
-  notifies :restart, resources("service[rsyslog]")
-end
-
-# https://bugs.launchpad.net/ubuntu/+source/rsyslog/+bug/940030
-logrotate_app "rsyslog" do
-  cookbook  "logrotate"
-  path      "/var/log/syslog"
-  options   ["missingok", "delaycompress", "notifempty"]
-  frequency "daily"
-  rotate    7
-  create    "640 syslog adm"
-  postrotate "reload rsyslog >/dev/null 2>&1 || true"
-end
-
-logrotate_app "rsyslog-other" do
-  cookbook  "logrotate"
-  path      [
-    "/var/log/mail.info",
-    "/var/log/mail.warn",
-    "/var/log/mail.err",
-    "/var/log/mail.log",
-    "/var/log/daemon.log",
-    "/var/log/kern.log",
-    "/var/log/auth.log",
-    "/var/log/user.log",
-    "/var/log/lpr.log",
-    "/var/log/cron.log",
-    "/var/log/debug",
-    "/var/log/messages"
-  ]
-  options   ["missingok", "delaycompress", "notifempty"]
-  frequency "weekly"
-  rotate    4
-  create    "644 syslog adm"
-  postrotate "restart rsyslog >/dev/null 2>&1 || true"
-end
-
 logrotate_app "proftpd-modules" do
-  cookbook  "logrotate"
-  path      [
-    "/var/log/proftpd/ban.log",
-    "/var/log/proftpd/sftp.log",
-    "/var/log/proftpd/sql.log"
+  cookbook "logrotate"
+  path [
+    node["proftpd"]["system_log"],
+    node["proftpd"]["transfer_log"],
+    node["proftpd"]["sql"]["log"],
+    node["proftpd"]["sftp"]["log"],
+    node["proftpd"]["ban"]["log"]
   ]
   options   ["missingok", "compress", "delaycompress", "notifempty"]
   frequency "weekly"
   rotate    7
-  create    "640 root adm"
+  create    "640 adm"
   postrotate <<-EOF
    restart rsyslog >/dev/null 2>&1 || true
    invoke-rc.d proftpd restart 2>/dev/null >/dev/null || true
   EOF
 end
 
-["xfer", "ban", "sftp"].each do |log|
-  base_papertrail "proftpd-#{log}" do
-    tag "proftpd-#{log}"
-    facility node["proftpd"]["syslog"]["facility"]
-    file "/var/log/proftpd/#{log}.log"
-    host node["proftpd"]["syslog"]["host"]
-    port node["proftpd"]["syslog"]["port"]
+directory "/var/log/proftpd" do
+  recursive true
+  owner "root"
+  group "adm"
+  action :create
+end
+
+[
+  node["proftpd"]["system_log"],
+  node["proftpd"]["transfer_log"],
+  node["proftpd"]["sql"]["log"],
+  node["proftpd"]["sftp"]["log"],
+  node["proftpd"]["ban"]["log"]
+].each do |log|
+  file(log) do
+    mode "0640"
+    owner "root"
+    group "adm"
+    action :create
   end
 end
 
-base_papertrail "proftpd-main" do
-  tag "proftpd-main"
-  facility node["proftpd"]["syslog"]["facility"]
-  file "/var/log/proftpd/proftpd.log"
-  host node["proftpd"]["syslog"]["host"]
-  port node["proftpd"]["syslog"]["port"]
+["main", "xfer", "ban", "sftp"].each do |log|
+  rsyslog_papertrail_log_file "proftpd-#{log}" do
+    file "/var/log/proftpd/#{log}.log"
+    host node["base"]["logging"]["papertrail"]["operations"]["host"]
+    port node["base"]["logging"]["papertrail"]["operations"]["port"]
+    notifies :restart, "service[rsyslog]", :delayed
+  end
+
+  rsyslog_papertrail_log_program "proftpd-#{log}" do
+    program "proftpd-#{log}"
+    host node["base"]["logging"]["papertrail"]["operations"]["host"]
+    port node["base"]["logging"]["papertrail"]["operations"]["port"]
+    notifies :restart, "service[rsyslog]", :delayed
+  end
 end

@@ -1,0 +1,36 @@
+DEPENDENCIES
+  apt
+  aws
+    git: git://github.com/kinesisptyltd/chef-aws.git
+    revision: 35541e16dcf8976ef81a3b3b3f1c1ade217f58ff
+  aws-proftpd
+    path: .
+    metadata: true
+  rsyslog
+    git: git://github.com/kinesisptyltd/chef-rsyslog.git
+    revision: 11d42e956d2d315dcf12eb5585ead17849357199
+  timezone
+    git: git://github.com/kinesisptyltd/chef-timezone.git
+    revision: a5dfcbba4338252d29dbcd4abb26ef7c1486c252
+
+GRAPH
+  apt (3.0.0)
+  aws (1.0.0)
+    ohai (>= 0.0.0)
+  aws-proftpd (1.0.0)
+    apt (>= 0.0.0)
+    aws (>= 0.0.0)
+    hostsfile (>= 0.0.0)
+    iptables (>= 0.0.0)
+    logrotate (>= 0.0.0)
+    openssh (>= 0.0.0)
+    rsyslog (>= 0.0.0)
+  hostsfile (2.4.5)
+  iptables (2.2.0)
+  logrotate (1.9.2)
+  ohai (3.0.1)
+  openssh (2.0.0)
+    iptables (>= 1.0)
+  rsyslog (1.0.0)
+    apt (>= 0.0.0)
+  timezone (1.0.0)

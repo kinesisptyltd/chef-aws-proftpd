@@ -28,7 +28,7 @@ default[:proftpd][:group] = "nogroup"
 default[:proftpd][:umask] = "022 022"
 default[:proftpd][:data_directory] = "/data"
 
-default[:proftpd][:system_log] = "/var/log/proftpd/proftpd.log"
+default[:proftpd][:system_log] = "/var/log/proftpd/main.log"
 default[:proftpd][:transfer_log] = "/var/log/proftpd/xfer.log"
 
 # Networking
@@ -57,12 +57,10 @@ default[:proftpd][:sftp][:auth_methods] = "password"
 default[:proftpd][:sftp][:host_rsa_key] = "/etc/ssh/ssh_host_rsa_key"
 default[:proftpd][:sftp][:host_dsa_key] = "/etc/ssh/ssh_host_dsa_key"
 
+# Ban
+default[:proftpd][:ban][:log] = "/var/log/proftpd/ban.log"
+
 default[:openssh][:server][:port] = 2222
 
 # Backup cron job
 default[:proftpd][:backup][:bucket] = nil
-
-# Logging
-default[:proftpd][:syslog][:host] = nil
-default[:proftpd][:syslog][:port] = nil
-default[:proftpd][:syslog][:facility] = "local3"

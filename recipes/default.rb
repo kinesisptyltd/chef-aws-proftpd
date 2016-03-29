@@ -1,4 +1,6 @@
+include_recipe "apt"
 include_recipe "aws"
+include_recipe "rsyslog"
 include_recipe "aws-proftpd::logging"
 include_recipe "aws-proftpd::blacklists"
 include_recipe "aws-proftpd::install"
